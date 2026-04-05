@@ -4,11 +4,11 @@ This project is an automated testing suite designed to validate the functionalit
 
 ## Tech Stack
 
-**Language:** Java (JDK 17+)
-**Automation:** Selenium WebDriver
-**Test Framework:** TestNG
-**Build Tool:** Maven
-**Version Control:** Git & GitHub
+- **Language:** Java (JDK 17+)
+- **Automation:** Selenium WebDriver
+- **Test Framework:** TestNG
+- **Build Tool:** Maven
+- **Version Control:** Git & GitHub
 
 ## Roadmap
 
