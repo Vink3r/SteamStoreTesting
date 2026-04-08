@@ -35,7 +35,7 @@ mvn test
 
 ## Workflow Diagram
 
-![App Screenshot](https://i.imgur.com/mDF7X7c.png)
+![App Screenshot](https://i.imgur.com/ww03IuW.png)
 
 ## Contributors
 
