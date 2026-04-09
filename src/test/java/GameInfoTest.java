@@ -26,8 +26,16 @@ public class GameInfoTest extends BaseTest {
         }
 
         //Continuity Check: Ensure we are on the Portal 2 page before scrolling
-        if (!getDriver().getCurrentUrl().contains("app/620")) {
+        if (parallel) {
             getDriver().get("https://store.steampowered.com/app/620/Portal_2/");
+        }
+        else {
+            WebElement searchBox = getDriver().findElement(By.xpath("/html/body/div[1]/div[7]/div[2]/div[2]/div/div/div[2]/div/div[1]/div[2]/form/div/input"));
+            searchBox.clear();
+            searchBox.sendKeys("Portal 2");
+            searchBox.submit();
+            WebElement firstResult = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='search_resultsRows']//a[1]//span[@class='title']")));
+            firstResult.click();
         }
     }
 

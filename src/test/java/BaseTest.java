@@ -18,6 +18,10 @@ public class BaseTest {
 
     @BeforeTest
     public void setUp(ITestContext context) {
+        System.setProperty("webdriver.chrome.silentOutput", "true");
+        System.setProperty("webdriver.http.factory", "jdk-http-client");
+        Logger.getLogger("org.openqa.selenium.devtools.CdpVersionFinder").setLevel(Level.OFF);
+        Logger.getLogger("org.openqa.selenium").setLevel(Level.SEVERE);
         String parallelMode = context.getSuite().getXmlSuite().getParallel().toString();
         if (!parallelMode.equalsIgnoreCase("none")) {
             parallel = true;

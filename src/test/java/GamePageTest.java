@@ -16,10 +16,19 @@ public class GamePageTest extends BaseTest {
     public void navigateToPortal2() {
         wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
 
-        //If parallel, recreate linear search test; if serial, we should already be here
-        if (!getDriver().getCurrentUrl().contains("store.steampowered.come")) {
+        //If parallel, recreate linear search test; if serial, replicate the process to get here from Search
+        if (parallel) {
             getDriver().get("https://store.steampowered.com/search?term=Portal+2");
-
+            WebElement firstResult = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='search_resultsRows']//a[1]//span[@class='title']")));
+            firstResult.click();
+        }
+        else {
+            WebElement searchBox = getDriver().findElement(By.xpath("/html/body/div[1]/div[7]/div[2]/div[2]/div/div/div[2]/div/div[1]/div[2]/form/div/input"));
+            searchBox.clear();
+            searchBox.sendKeys("Portal 2");
+            searchBox.submit();
+            WebElement firstResult = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='search_resultsRows']//a[1]//span[@class='title']")));
+            firstResult.click();
         }
         captureState("GamePage_Portal2_Loaded");
     }
@@ -27,9 +36,6 @@ public class GamePageTest extends BaseTest {
     @Test(priority = 1)
     public void testCorrectURL() {
         //App 620 is the official Steam ID for Portal 2
-        WebElement firstResult = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//div[@id='search_resultsRows']//a[1]//span[@class='title']")));
-        firstResult.click();
         String currentUrl = getDriver().getCurrentUrl();
         Assert.assertTrue(currentUrl.contains("app/620/Portal_2"), "The URL does not match the expected Portal 2 App ID path.");
     }

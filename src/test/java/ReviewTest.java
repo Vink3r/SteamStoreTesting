@@ -17,10 +17,12 @@ public class ReviewTest extends BaseTest {
         wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
 
         //Ensure we are on the Portal 2 page to see the reviews
-        if (!getDriver().getCurrentUrl().contains("app/620")) {
+        if (parallel) {
             getDriver().get("https://store.steampowered.com/app/620/Portal_2/");
         }
-        ((JavascriptExecutor) getDriver()).executeScript("window.scrollTo(0, 0);");
+        else {
+            ((JavascriptExecutor) getDriver()).executeScript("window.scrollTo(0, 0);");
+        }
     }
 
     @Test(priority = 1)

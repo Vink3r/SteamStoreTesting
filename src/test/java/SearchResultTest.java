@@ -16,7 +16,7 @@ public class SearchResultTest extends BaseTest {
     public void setupSearch() {
         wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
         //If parallel, jump to store; if serial, we should already be here
-        if (!getDriver().getCurrentUrl().equals("https://store.steampowered.com/")) {
+        if (parallel) {
             getDriver().get("https://store.steampowered.com/");
         }
 
