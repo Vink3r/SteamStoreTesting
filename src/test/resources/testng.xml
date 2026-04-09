@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
-<suite name="Steam_Suite" parallel="none" thread-count="8">
+<suite name="Steam_Suite" parallel="classes" thread-count="8">
     <test name ="Steam_Navigation" preserve-order="true">
         <classes>
             <class name="StorePageTest"/>

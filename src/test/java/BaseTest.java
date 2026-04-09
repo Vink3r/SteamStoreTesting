@@ -1,6 +1,7 @@
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.ITestContext;
 import org.testng.annotations.*;
 import java.io.*;
 import java.nio.file.*;
@@ -13,22 +14,34 @@ public class BaseTest {
     static {Logger.getLogger("org.openqa.selenium").setLevel(Level.OFF);}
     protected static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     private static final String OUTPUT_PATH = "src/test/resources/output/";
+    protected static boolean parallel = false;
 
     @BeforeTest
-    public void setUp() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        driver.set(new ChromeDriver(options));
-        getDriver().manage().window().maximize();
-        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-
-        //If running in Parallel, navigate to a starting URL immediately.
-        //If Serial, the test will rely on the previous test's state or the first class's navigation.
-        String runMode = System.getProperty("runMode");
-        if ("classes".equalsIgnoreCase(runMode)) {
-            handleParallelStartup();
+    public void setUp(ITestContext context) {
+        String parallelMode = context.getSuite().getXmlSuite().getParallel().toString();
+        if (!parallelMode.equalsIgnoreCase("none")) {
+            parallel = true;
+        }
+        else       //Setup Linear driver for Linear
+        {
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--start-maximized", "--remote-allow-origins=*");
+            driver.set(new ChromeDriver(options));
+            getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         }
     }
+
+    @BeforeClass
+    public void setUpParallel() {
+        //Setup individual Drivers for Parallel
+        if (parallel) {
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--start-maximized", "--remote-allow-origins=*");
+            driver.set(new ChromeDriver(options));
+            getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        }
+    }
+
 
     public WebDriver getDriver() {
         return driver.get();
@@ -56,15 +69,17 @@ public class BaseTest {
         }
     }
 
-    private void handleParallelStartup() {
-        getDriver().get("https://store.steampowered.com/");
-    }
-
-    @AfterTest
+    @AfterClass
     public void tearDown() {
-        if (getDriver() != null) {
+        if (parallel && getDriver() != null) {
             getDriver().quit();
             driver.remove();
+        }
+    }
+    @AfterTest
+    public void tearDownLinear() {
+        if (!parallel && getDriver() != null) {
+            getDriver().quit();
         }
     }
 }
