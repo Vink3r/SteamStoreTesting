@@ -1,5 +1,6 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -15,8 +16,9 @@ public class DevPageTest extends BaseTest {
     public void navigateToDevPage() {
         wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
 
-        //If parallel, jump to store, if serial, we should already be here
+        //If parallel, replicate the navigation, if serial, we should already be here
         if (!getDriver().getCurrentUrl().contains("app/620")) {
+            getDriver().get("https://store.steampowered.com/search?term=Portal+2");
             getDriver().get("https://store.steampowered.com/app/620/Portal_2/");
         }
 
@@ -70,4 +72,5 @@ public class DevPageTest extends BaseTest {
         Assert.assertTrue(getDriver().getCurrentUrl().contains("/search"), "Failed to return to search page after double-back navigation.");
         captureState("DevPage_DoubleBack_Success");
     }
+
 }

@@ -4,6 +4,14 @@
 <suite name="Steam_Suite" parallel="none" thread-count="8">
     <test name ="Steam_Navigation" preserve-order="true">
         <classes>
+            <class name="StorePageTest"/>
+            <class name="SearchResultTest"/>
+            <class name="GamePageTest"/>
+            <class name="DevPageTest"/>
+            <class name="PublisherPageTest"/>
+            <class name="GameInfoTest"/>
+            <class name="ReviewTest"/>
+            <class name="CartPageTest"/>
         </classes>
     </test>
 </suite>

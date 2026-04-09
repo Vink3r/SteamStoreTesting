@@ -1,4 +1,5 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -19,6 +20,7 @@ public class CartPageTest extends BaseTest {
         if (!getDriver().getCurrentUrl().contains("app/620")) {
             getDriver().get("https://store.steampowered.com/app/620/Portal_2/");
         }
+        ((JavascriptExecutor) getDriver()).executeScript("window.scrollTo(0, 0);");
     }
 
     @Test(priority = 1)
@@ -38,7 +40,7 @@ public class CartPageTest extends BaseTest {
     @Test(priority = 2)
     public void testCorrectItemInCart() {
         //Portal 2 existed in the Cart
-        WebElement cartItem = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("«r2»")));
+        WebElement cartItem = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div[7]/div[7]/div[3]/div/div/div[2]/div[3]/div[1]/div[1]/div/div/div/div[2]/div[1]/div")));
 
         String actualGame = cartItem.getText();
 
@@ -65,7 +67,7 @@ public class CartPageTest extends BaseTest {
 
     @Test(priority = 4)
     public void testRemoveGameFromCart() {
-        WebElement removeLink = wait.until(ExpectedConditions.elementToBeClickable(By.id("«r4»")));
+        WebElement removeLink = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[1]/div[7]/div[7]/div[3]/div/div/div[2]/div[3]/div[1]/div[1]/div/div/div/div[2]/div[4]/div[2]/div[2]")));
         removeLink.click();
 
         //Verify the cart list area is gone or shows empty

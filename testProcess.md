@@ -48,7 +48,7 @@
 
 -Publisher: Use NetEase Games (Marvel Rivals)
 
-1. Bring you to the search dev page instead "search/?developer=NetEase%20Games
+1. Bring you to the search dev page instead "search/?developer=NetEase%20Games"
 
 2. "Blood Strike" in their result
 
@@ -60,7 +60,7 @@
 
 -Info: Scroll to
 
-1. "game_area_description" existed
+1. Game description area existed
 
 2. "About this Game" displayed -> Scrape Text
 
@@ -76,11 +76,11 @@
 
 2. Clickable and will bring you to a different section than staying still
 
-3. "app_review_hash" existed
+3. App Review Part Existed
 
-4. Can use Negative filter -> "No Recommended" exists -> Take screenshots
+4. Can use Negative filter
 
-5. Can Remove filter -> Take screenshots
+5. Can reset Filter
 
 -Cart Page
 

@@ -14,7 +14,7 @@ public class BaseTest {
     protected static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     private static final String OUTPUT_PATH = "src/test/resources/output/";
 
-    @BeforeClass
+    @BeforeTest
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
@@ -60,7 +60,7 @@ public class BaseTest {
         getDriver().get("https://store.steampowered.com/");
     }
 
-    @AfterClass
+    @AfterTest
     public void tearDown() {
         if (getDriver() != null) {
             getDriver().quit();

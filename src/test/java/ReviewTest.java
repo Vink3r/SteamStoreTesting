@@ -20,6 +20,7 @@ public class ReviewTest extends BaseTest {
         if (!getDriver().getCurrentUrl().contains("app/620")) {
             getDriver().get("https://store.steampowered.com/app/620/Portal_2/");
         }
+        ((JavascriptExecutor) getDriver()).executeScript("window.scrollTo(0, 0);");
     }
 
     @Test(priority = 1)

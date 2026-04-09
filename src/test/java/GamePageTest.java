@@ -1,5 +1,6 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -15,16 +16,20 @@ public class GamePageTest extends BaseTest {
     public void navigateToPortal2() {
         wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
 
-        //If parallel, jump to store; if serial, we should already be here
-        //App 620 is the official Steam ID for Portal 2
-        if (!getDriver().getCurrentUrl().contains("app/620")) {
-            getDriver().get("https://store.steampowered.com/app/620/Portal_2/");
+        //If parallel, recreate linear search test; if serial, we should already be here
+        if (!getDriver().getCurrentUrl().contains("store.steampowered.come")) {
+            getDriver().get("https://store.steampowered.com/search?term=Portal+2");
+
         }
         captureState("GamePage_Portal2_Loaded");
     }
 
     @Test(priority = 1)
     public void testCorrectURL() {
+        //App 620 is the official Steam ID for Portal 2
+        WebElement firstResult = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//div[@id='search_resultsRows']//a[1]//span[@class='title']")));
+        firstResult.click();
         String currentUrl = getDriver().getCurrentUrl();
         Assert.assertTrue(currentUrl.contains("app/620/Portal_2"), "The URL does not match the expected Portal 2 App ID path.");
     }
@@ -67,4 +72,5 @@ public class GamePageTest extends BaseTest {
         Assert.assertTrue(getDriver().getCurrentUrl().contains("app/620"), "Forward button did not return to Game Page.");
         captureState("GamePage_Navigated_Forward");
     }
+
 }
