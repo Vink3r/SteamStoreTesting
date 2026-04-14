@@ -10,11 +10,11 @@ This project is an automated testing suite designed to validate the functionalit
 - **Build Tool:** Maven
 - **Version Control:** Git & GitHub
 
-## Roadmap
+## Future Roadmap
 
-- Test integrations similar to Workflow Diagram
-- Proper TestNG documentation
-- Parallel tests running (Additional & Proper .java classes | 8 minimum)
+- Git Action integration
+- Additional Tests, additional Games
+- Login page verification
 - Captcha resolving
 
 ## Installation
@@ -28,9 +28,20 @@ git clone https://github.com/Vink3r/SteamStoreTesting.git
 ```bash
 mvn clean install
 ```
-**3. Run Tests:**
+**3. Run regular Test:**
 ```bash
 mvn test
+```
+**4. Run Test Parallel (classes) or Linear (none)**
+```bash
+mvn test -DsuiteXmlFile=testng.xml -Dparallel=classes
+mvn test -DsuiteXmlFile=testng.xml -Dparallel=none
+```
+**5. Run Test and Generate Report**
+
+Add this line after `test`
+```bash
+surefire-report:report
 ```
 
 ## Workflow Diagram

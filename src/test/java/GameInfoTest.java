@@ -17,7 +17,7 @@ public class GameInfoTest extends BaseTest {
     public void ensureStateForInfoScraping() {
         wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
 
-        //File refresher
+        //File refresher (delete old file)
         File infoFile = new File("src/test/resources/output/Info.txt");
         if (infoFile.exists()) {
             if (infoFile.delete()) {
@@ -39,12 +39,14 @@ public class GameInfoTest extends BaseTest {
         }
     }
 
+    //Test Description area existed
     @Test(priority = 1)
     public void testDescriptionAreaExists() {
         WebElement description = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("game_area_description")));
         Assert.assertTrue(description.isDisplayed(), "Game description area is missing from the page.");
     }
 
+    //Web scraping test
     @Test(priority = 2)
     public void testScrapeAboutGame() {
         //"About this Game" displayed -> Scrape Text
@@ -62,6 +64,7 @@ public class GameInfoTest extends BaseTest {
         captureState("Info_AboutGame_Scraped");
     }
 
+    //Scrolling test for Requirement section
     @Test(priority = 3)
     public void testSystemRequirementsDisplayed() {
         WebElement sysReq = getDriver().findElement(By.className("sysreq_tabs"));
@@ -72,6 +75,7 @@ public class GameInfoTest extends BaseTest {
         Assert.assertTrue(sysReq.isDisplayed(), "System Requirements section is not visible.");
     }
 
+    //Test Minimum spec label displayed
     @Test(priority = 4)
     public void testMinimumSpecsDisplayed() {
         //We look for the bold 'Minimum:' label inside the requirements list
@@ -84,6 +88,7 @@ public class GameInfoTest extends BaseTest {
         saveToFile("Info.txt", "SECTION: MINIMUM SPECS\n" + specs);
     }
 
+    //Test for Steam Deck verification badge
     @Test(priority = 5)
     public void testSteamDeckVerifiedStatus() {
         WebElement deckSection = getDriver().findElement(By.xpath("/html/body/div[1]/div[7]/div[7]/div[3]/div[2]/div[1]/div[4]/div[1]/div[8]/div/div[2]/div[1]"));

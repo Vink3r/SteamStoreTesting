@@ -33,6 +33,7 @@ public class GamePageTest extends BaseTest {
         captureState("GamePage_Portal2_Loaded");
     }
 
+    //Test correct page URL
     @Test(priority = 1)
     public void testCorrectURL() {
         //App 620 is the official Steam ID for Portal 2
@@ -40,12 +41,14 @@ public class GamePageTest extends BaseTest {
         Assert.assertTrue(currentUrl.contains("app/620/Portal_2"), "The URL does not match the expected Portal 2 App ID path.");
     }
 
+    //Test correct title display
     @Test(priority = 2)
     public void testCorrectTitleDisplayed() {
         WebElement title = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("appHubAppName")));
         Assert.assertEquals(title.getText(), "Portal 2", "The game title displayed is incorrect.");
     }
 
+    //Test game image displayed and visible
     @Test(priority = 3)
     public void testGameImageDisplayed() {
         //Steam uses 'game_header_image' for the main capsule image
@@ -57,6 +60,7 @@ public class GamePageTest extends BaseTest {
         Assert.assertTrue(src != null && src.startsWith("https"), "Game image source is broken or missing.");
     }
 
+    //Test Add to cart button exist
     @Test(priority = 4)
     public void testAddToCartButtonExists() {
         //Look for the 'Add to Cart' button specifically for the standard edition
@@ -66,6 +70,7 @@ public class GamePageTest extends BaseTest {
         Assert.assertTrue(addToCartBtn.getText().contains("Add to Cart"), "Button text is incorrect.");
     }
 
+    //Test back and forth navigation
     @Test(priority = 5)
     public void testNavigationHistory() {
         getDriver().navigate().back();

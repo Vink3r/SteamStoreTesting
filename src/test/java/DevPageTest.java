@@ -28,6 +28,7 @@ public class DevPageTest extends BaseTest {
         captureState("DevPage_Valve_Loaded");
     }
 
+    //Test Dev page URL
     @Test(priority = 1)
     public void testDevNavigationAndUrl() {
         //Verify URL contains 'developer/valve' or the specific dev ID
@@ -35,6 +36,7 @@ public class DevPageTest extends BaseTest {
         Assert.assertTrue(currentUrl.contains("developer") || currentUrl.contains("pub/valve"), "Navigation to Developer page failed.");
     }
 
+    //Test Follow button
     @Test(priority = 2)
     public void testFollowButtonTrigger() {
         //Click Follow Button -> Please Log in pop up
@@ -49,6 +51,7 @@ public class DevPageTest extends BaseTest {
         getDriver().findElement(By.xpath("/html/body/div[4]/div[3]/div/div[2]/div/span")).click();
     }
 
+    //Test Dev page name displayed
     @Test(priority = 3)
     public void testCorrectDisplayName() {
         //Verification of the Page Header/Name
@@ -56,6 +59,7 @@ public class DevPageTest extends BaseTest {
         Assert.assertTrue(devName.getText().contains("Valve"), "Developer name does not match.");
     }
 
+    //Test Dev banner image displayed
     @Test(priority = 4)
     public void testBannerDisplay() {
         //Check for the custom developer banner/background
@@ -63,6 +67,7 @@ public class DevPageTest extends BaseTest {
         Assert.assertTrue(banner.isDisplayed(), "Developer banner is missing.");
     }
 
+    //Test navigation to lead back to Search based on user's journey
     @Test(priority = 5)
     public void testDoubleBackNavigation() {
         getDriver().navigate().back();  //Back to Game Page

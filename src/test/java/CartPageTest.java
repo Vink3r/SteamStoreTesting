@@ -25,6 +25,7 @@ public class CartPageTest extends BaseTest {
         }
     }
 
+    //Adding Product to Cart testing
     @Test(priority = 1)
     public void testAddToCart() {
         //Add to Cart button clicked
@@ -39,6 +40,7 @@ public class CartPageTest extends BaseTest {
         captureState("Cart_Page_Loaded");
     }
 
+    //Verified Item in Cart testing
     @Test(priority = 2)
     public void testCorrectItemInCart() {
         //Portal 2 existed in the Cart
@@ -49,6 +51,7 @@ public class CartPageTest extends BaseTest {
         Assert.assertEquals(actualGame, "Portal 2", "Portal 2 is not showing in the cart list.");
     }
 
+    //Test for Login pop-up when continue to pay
     @Test(priority = 3)
     public void testContinueToPaymentShowsLogin() {
         //Continue to Payment will show the Login Page
@@ -67,6 +70,7 @@ public class CartPageTest extends BaseTest {
         wait.until(ExpectedConditions.invisibilityOf(loginModal));
     }
 
+    //Test for removing item in Cart
     @Test(priority = 4)
     public void testRemoveGameFromCart() {
         WebElement removeLink = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[1]/div[7]/div[7]/div[3]/div/div/div[2]/div[3]/div[1]/div[1]/div/div/div/div[2]/div[4]/div[2]/div[2]")));
@@ -77,6 +81,7 @@ public class CartPageTest extends BaseTest {
         captureState("Cart_Item_Removed");
     }
 
+    //Test for correct bring back when continue shopping
     @Test(priority = 5)
     public void testContinueShoppingReturnsHome() {
         //Continue Shopping button will bring us back to home Page

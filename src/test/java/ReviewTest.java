@@ -20,11 +20,12 @@ public class ReviewTest extends BaseTest {
         if (parallel) {
             getDriver().get("https://store.steampowered.com/app/620/Portal_2/");
         }
-        else {
+        else {      //Scroll into view if Linear since element won't load if we don't
             ((JavascriptExecutor) getDriver()).executeScript("window.scrollTo(0, 0);");
         }
     }
 
+    //Test game Review's overall displayed as expected result
     @Test(priority = 1)
     public void testSentimentLabel() {
         //Steam uses 'game_review_summary' for the high-level sentiment
@@ -34,6 +35,7 @@ public class ReviewTest extends BaseTest {
         captureState("Review_Sentiment_Verified");
     }
 
+    //Test clicking Reviews will jump to corresponding section
     @Test(priority = 2)
     public void testJumpToReviews() {
         //Click the review summary to jump down the page
@@ -44,6 +46,7 @@ public class ReviewTest extends BaseTest {
         Assert.assertTrue(getDriver().getCurrentUrl().contains("#app_reviews_hash"), "Page did not jump to the reviews section anchor.");
     }
 
+    //Test review app anchor
     @Test(priority = 3)
     public void testReviewHashExists() {
         //Verify the "app_reviews_hash" ID exists in the DOM
@@ -51,6 +54,7 @@ public class ReviewTest extends BaseTest {
         Assert.assertTrue(reviewSection.isDisplayed(), "The reviews section anchor is missing.");
     }
 
+    //Review filter testing
     @Test(priority = 4)
     public void testNegativeFilterAndScreenshot() {
         //Apply Negative filter -> Verify "Not Recommended" exists
@@ -74,6 +78,7 @@ public class ReviewTest extends BaseTest {
         captureState("Review_Negative_Filter_Applied");
     }
 
+    //Review filter reset testing
     @Test(priority = 5)
     public void testRemoveFilter() {
         //Click "All" to reset filters

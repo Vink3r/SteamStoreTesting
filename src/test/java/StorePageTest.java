@@ -13,18 +13,22 @@ public class StorePageTest extends BaseTest {
         captureState("StorePage_Initial_Load");
     }
 
+    //Test page URL
     @Test(priority = 1)
     public void testCorrectPageURL() {
         String currentUrl = getDriver().getCurrentUrl();
         Assert.assertTrue(currentUrl.contains("steampowered.com"), "URL does not match Steam Store!");
     }
 
+    //Test element display (logo)
     @Test(priority = 2)
     public void testSteamLogoDisplayed() {
+        //Find steam page element if visible
         WebElement logo = getDriver().findElement(By.xpath("//div[@class='logo']//img"));
         Assert.assertTrue(logo.isDisplayed(), "Steam Logo is not visible on the Store page.");
     }
 
+    //Test page navigation to About page and back
     @Test(priority = 3)
     public void testAboutPageNavigation() {
         WebElement aboutLink = getDriver().findElement(By.linkText("ABOUT"));
@@ -37,6 +41,7 @@ public class StorePageTest extends BaseTest {
         getDriver().navigate().back();
     }
 
+    //Test language display & drop down menu
     @Test(priority = 4)
     public void testLanguageIsCorrect() {
         //Click the language dropdown
@@ -51,6 +56,7 @@ public class StorePageTest extends BaseTest {
         langTrigger.click();
     }
 
+    //Test search box display
     @Test(priority = 5)
     public void testSearchBoxExists() {
         WebElement searchBox = getDriver().findElement(By.xpath("/html/body/div[1]/div[7]/div[2]/div[2]/div/div/div[2]/div/div[1]/div[2]/form/div/input"));
