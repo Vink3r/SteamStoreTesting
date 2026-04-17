@@ -4,8 +4,6 @@ target/
 !**/src/test/**/target/
 .kotlin
 
-**/screenshots
-**/src/test/resources/output
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
